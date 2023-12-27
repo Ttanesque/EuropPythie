@@ -157,7 +157,9 @@ class Game(Extension):
         )
 
         # get the str of games sort
+        res = list(filter(lambda x: (x[1] > 10), res))
         game_match = [s[0] for s in res]
+        log.debug(game_match)
         title = str.format("{} Result for {}", str(len(game_match)), research)
 
 
