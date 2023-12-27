@@ -1,0 +1,5 @@
+[EuroPythie]
+token = "your token here"
+
+[Game]
+search_limit = 100

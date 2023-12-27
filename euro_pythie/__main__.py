@@ -1,8 +1,8 @@
 from interactions import Client, Intents, listen
+from log import main as log
+from config import bot as bot_conf
 import logging
 import database
-import tomllib
-from log import main as log 
 
 log.info("Initilization of EuroPythie")
 
@@ -21,8 +21,5 @@ async def on_ready():
 
 database.init()
 
-with open("config.toml", "rb") as c:
-    config = tomllib.load(c)
-
 bot.load_extension("game")
-bot.start(config["token"])
+bot.start(bot_conf["token"])

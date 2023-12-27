@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "europythie"
-version = "0.1.0"
+version = "1.0"
 description = ""
 authors = ["Hugo Porchet <hugo.porchet.belmonte@gmail.com>"]
 repository = "https://github.com/Ttanesque/EuropPythie"

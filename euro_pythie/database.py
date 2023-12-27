@@ -35,6 +35,8 @@ def init() -> None:
     )
     cursor.close()
 
+    log.info("Database Ready")
+
 
 def getGames() -> list:
     clean()
