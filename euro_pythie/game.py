@@ -9,12 +9,9 @@ from interactions import (
     Member
 )
 from datetime import date
-import logging
+from log import command as log
 import interactions
 import database
-
-log = logging.getLogger("Euro_pythie")
-
 
 class Game(Extension):
     game = SlashCommand(

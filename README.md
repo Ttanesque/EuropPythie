@@ -3,4 +3,4 @@
 > EuroPythie is a bot for manage the EUIV multiplayer game in progress.
 
 ## Dependencies
-- [Interactions](https://interactions-py.github.io)
+- [Interactions](https://github.com/interactions-py/interactions.py)

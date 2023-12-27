@@ -1,12 +1,9 @@
 from datetime import datetime, date
-import logging
+from log import database as log
 import sqlite3
-import schedule
 
 DB = sqlite3.connect("EuroPythie.sqlite")
 DATE_FORMAT = "%d-%m-%Y"
-log = logging.getLogger("DATABASE")
-
 
 def clean() -> None:
     log.info("CLEAN DATABASE")
@@ -20,9 +17,6 @@ def clean() -> None:
 
     DB.commit()
     cursor.close()
-
-
-schedule.every(1).minute.do(clean)
 
 
 # https://stackoverflow.com/a/4040168
@@ -43,6 +37,7 @@ def init() -> None:
 
 
 def getGames() -> list:
+    clean()
     cursor = DB.cursor()
     res = []
 

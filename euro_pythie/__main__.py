@@ -2,19 +2,7 @@ from interactions import Client, Intents, listen
 import logging
 import database
 import tomllib
-from log import CustomFormatter
-
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-ch.setFormatter(CustomFormatter())
-
-logging.basicConfig(
-    encoding="utf-8",
-    format="%(asctime)s %(levelname)s: %(message)s",
-    level=logging.DEBUG,
-    handlers=[ch],
-)
-log = logging.getLogger("Euro_pythie")
+from log import main as log 
 
 log.info("Initilization of EuroPythie")
 
