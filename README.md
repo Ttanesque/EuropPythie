@@ -4,3 +4,4 @@
 
 ## Dependencies
 - [Interactions](https://github.com/interactions-py/interactions.py)
+- [RapidFuzz](https://github.com/maxbachmann/RapidFuzz)
