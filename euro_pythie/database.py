@@ -12,7 +12,7 @@ def clean() -> None:
     date_del = date.today()
     date_del = date_del.replace(year=(date_del.year - 1))
     cursor.execute(
-        "DELETE FROM games WHERE date_creation < '" + date_del.strftime() + "'"
+        "DELETE FROM games WHERE date_creation < '" + date_del.strftime(DATE_FORMAT) + "'"
     )
 
     DB.commit()
@@ -75,7 +75,7 @@ class Game:
         else:
             perime = ""
         return str.format(
-            "{}\t{}\t{}\t",
+            "{}\t{}\t{}\t{}",
             perime,
             self.date_creation.strftime(DATE_FORMAT),
             self.name,

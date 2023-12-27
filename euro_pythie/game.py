@@ -10,6 +10,7 @@ from interactions import (
 )
 from datetime import date
 from log import command as log
+from rapidfuzz import process, fuzz
 import interactions
 import database
 
@@ -109,3 +110,24 @@ class Game(Extension):
         embed = Embed(title=("Result " + str(len(games))), description="\n".join(map(str, games)))
 
         await ctx.send(embed=embed)
+
+
+    @game.subcommand(
+        sub_cmd_name="search",
+        sub_cmd_description="Take some of our word and with some magic think for you",
+        options=[
+            SlashCommandOption(name="research", type=OptionType.STRING)
+        ]
+    )
+    async def search(self, ctx: SlashContext, research: str):
+        games = database.getGames()
+
+        game_str = [str(g) for g in games]
+        res = process.extract(query=research, choices=game_str, scorer=fuzz.token_sort_ratio, limit=10)
+
+        game_match = [s[0] for s in res]
+
+        embed = Embed(title=("Result " + str(len(game_match))), description="\n".join(map(str, game_match)))
+
+        await ctx.send(embed=embed)
+        
