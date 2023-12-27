@@ -1,18 +1,28 @@
 from interactions import Client, Intents, listen
-import logging as log
+import logging
 import database
 import tomllib
+from log import CustomFormatter
 
-log.basicConfig(
-    encoding="utf-8", format="%(asctime)s %(levelname)s: %(message)s", level=log.DEBUG
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+ch.setFormatter(CustomFormatter())
+
+logging.basicConfig(
+    encoding="utf-8",
+    format="%(asctime)s %(levelname)s: %(message)s",
+    level=logging.DEBUG,
+    handlers=[ch],
 )
+log = logging.getLogger("Euro_pythie")
+
 log.info("Initilization of EuroPythie")
 
 bot = Client(
     intents=Intents.DEFAULT,
     sync_interactions=True,
     asyncio_debug=True,
-    logger=log.getLogger("Interactions"),
+    logger=logging.getLogger("Interactions"),
 )
 
 

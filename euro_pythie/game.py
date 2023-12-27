@@ -9,9 +9,11 @@ from interactions import (
     Member
 )
 from datetime import date
+import logging
 import interactions
-import logging as log
 import database
+
+log = logging.getLogger("Euro_pythie")
 
 
 class Game(Extension):
@@ -98,7 +100,7 @@ class Game(Extension):
         log.debug("%s", players)
         database.saveGames(g_name, date.today().strftime("%d-%m-%Y"), ",".join(players))
 
-        await ctx.send("Acknowledge")
+        await ctx.send("Game saved")
 
     @game.subcommand(
         sub_cmd_name="ls", sub_cmd_description="Liste les parties en cours"
@@ -107,6 +109,6 @@ class Game(Extension):
         games = database.getGames()
         log.debug("%s game(s) found", len(games))
 
-        embed = Embed(title="Result", description="\n".join(map(str, games)))
+        embed = Embed(title=("Result " + str(len(games))), description="\n".join(map(str, games)))
 
         await ctx.send(embed=embed)
