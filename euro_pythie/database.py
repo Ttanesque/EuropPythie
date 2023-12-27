@@ -73,12 +73,11 @@ class Game:
     def __str__(self) -> str:
         players = " ".join(self.players)
         if month_diff(self.date_creation, date.today()) > 3:
-            perime = "[out of date]"
+            format_str = "~~{}\t{}\t{}~~"
         else:
-            perime = ""
+            format_str = "{}\t{}\t{}"
         return str.format(
-            "{}\t{}\t{}\t{}",
-            perime,
+            format_str,
             self.date_creation.strftime(DATE_FORMAT),
             self.name,
             players,
