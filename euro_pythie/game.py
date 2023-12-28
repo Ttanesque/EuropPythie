@@ -129,6 +129,9 @@ class Game(Extension):
         title: str = str.format("{} Game Found", str(len(games)))
         games_str: list = map(str, games)
 
+        if len(list(games_str)) == 0:
+            games_str = [""]
+
         from __main__ import bot
 
         paginated_games = Paginator.create_from_list(bot, prefix="Date Name Players", content=games_str, page_size=500)
@@ -144,13 +147,13 @@ class Game(Extension):
     )
     async def purge(self, ctx: SlashContext) -> None:
         try:
-            database.clean()
+            database.purge()
         except sqlite3.Error as e:
             log.error("Error when cleaning games {}", e)
             ctx.send("Error when cleaning Games")
             return
         
-        ctx.send("Games has been purges")
+        await ctx.send("Games has been purges")
 
     @game.subcommand(
         sub_cmd_name="search",
