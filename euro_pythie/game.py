@@ -123,7 +123,7 @@ class Game(Extension):
     @game.subcommand(
         sub_cmd_name="ls", sub_cmd_description="Liste les parties en cours"
     )
-    async def ls(self, ctx: SlashContext):
+    async def ls(self, ctx: SlashContext) -> None:
         games: list = database.getGames()
         log.debug("%s game(s) found", len(games))
         title: str = str.format("{} Game Found", str(len(games)))
@@ -138,6 +138,19 @@ class Game(Extension):
         # embed = Embed(title=title, description=games_str)
 
         # await ctx.send(embed=embed)
+
+    @game.subcommand(
+        sub_cmd_name="dlc_payed",
+    )
+    async def purge(self, ctx: SlashContext) -> None:
+        try:
+            database.clean()
+        except sqlite3.Error as e:
+            log.error("Error when cleaning games {}", e)
+            ctx.send("Error when cleaning Games")
+            return
+        
+        ctx.send("Games has been purges")
 
     @game.subcommand(
         sub_cmd_name="search",

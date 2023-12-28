@@ -5,6 +5,7 @@ import sqlite3
 DB = sqlite3.connect("EuroPythie.sqlite")
 DATE_FORMAT = "%d-%m-%Y"
 
+
 def clean() -> None:
     log.info("CLEAN DATABASE")
     cursor = DB.cursor()
@@ -12,8 +13,20 @@ def clean() -> None:
     date_del = date.today()
     date_del = date_del.replace(year=(date_del.year - 1))
     cursor.execute(
-        "DELETE FROM games WHERE date_creation < '" + date_del.strftime(DATE_FORMAT) + "'"
+        "DELETE FROM games WHERE date_creation < '"
+        + date_del.strftime(DATE_FORMAT)
+        + "'"
     )
+
+    DB.commit()
+    cursor.close()
+
+
+def purge() -> None:
+    log.info("Purge of DB")
+    cursor = DB.cursor()
+
+    cursor.execute("DELETE FROM GAMES")
 
     DB.commit()
     cursor.close()
