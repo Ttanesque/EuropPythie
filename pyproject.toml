@@ -8,6 +8,9 @@ license = "MIT"
 readme = "README.md"
 packages = [{include = "euro_pythie"}]
 
+[tool.poetry.scripts]
+europythie = "euro_pythie.main:init"
+
 [tool.poetry.dependencies]
 python = "^3.11"
 interactions-py = "^5.11.0"

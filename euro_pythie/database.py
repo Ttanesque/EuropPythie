@@ -1,5 +1,5 @@
 from datetime import datetime, date
-from log import database as log
+from .log import database as log
 import sqlite3
 
 DB = sqlite3.connect("EuroPythie.sqlite")

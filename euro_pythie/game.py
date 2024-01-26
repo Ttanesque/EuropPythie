@@ -10,11 +10,11 @@ from interactions import (
 )
 from interactions.ext.paginators import Paginator
 from datetime import date
-from log import command as log
+from .log import command as log
 from rapidfuzz import process, fuzz, utils
-from config import game
+from .config import game
 import interactions
-import database
+import euro_pythie.database
 import sqlite3
 
 
