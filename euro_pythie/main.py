@@ -1,8 +1,9 @@
 from interactions import Client, Intents, listen
-from log import main as log
-from config import bot as bot_conf
+from .log import main as log
+from .config import bot as bot_conf
 import logging
-import database
+from .database import database as db
+
 
 log.info("Initilization of EuroPythie")
 
@@ -19,7 +20,7 @@ async def on_ready():
     log.info("EuroPythie is ready")
 
 
-database.init()
+db.init()
 
-bot.load_extension("game")
+bot.load_extension("euro_pythie.game")
 bot.start(bot_conf["token"])

@@ -10,11 +10,11 @@ from interactions import (
 )
 from interactions.ext.paginators import Paginator
 from datetime import date
-from log import command as log
+from .log import command as log
 from rapidfuzz import process, fuzz, utils
-from config import game
+from .database import database
+from .config import game
 import interactions
-import database
 import sqlite3
 
 
@@ -127,12 +127,12 @@ class Game(Extension):
         games: list = database.getGames()
         log.debug("%s game(s) found", len(games))
         title: str = str.format("{} Game Found", str(len(games)))
-        games_str: list = map(str, games)
+        games_str: list = list(map(str, games))
 
-        if len(list(games_str)) == 0:
+        if len(games_str) == 0:
             games_str = [""]
 
-        from __main__ import bot
+        from .main import bot
 
         paginated_games = Paginator.create_from_list(bot, prefix="Date Name Players", content=games_str, page_size=500)
         paginated_games.default_title = title
@@ -180,8 +180,11 @@ class Game(Extension):
         log.debug(game_match)
         title = str.format("{} Result for {}", str(len(game_match)), research)
 
+        if len(game_match) == 0:
+            game_match = [""]
 
-        from __main__ import bot
+
+        from .main import bot
 
         paginated_games = Paginator.create_from_list(bot, prefix="Date Name Players", content=game_match, page_size=500)
         paginated_games.default_title = title
