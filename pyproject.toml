@@ -9,7 +9,7 @@ readme = "README.md"
 packages = [{include = "euro_pythie"}]
 
 [tool.poetry.scripts]
-europythie = "euro_pythie.main:init"
+europythie = "euro_pythie.main:__main__"
 
 [tool.poetry.dependencies]
 python = "^3.11"
